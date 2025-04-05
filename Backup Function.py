@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import os
 
 def copy_files(source, destination):
     """Recursively copies files from source to destination."""
