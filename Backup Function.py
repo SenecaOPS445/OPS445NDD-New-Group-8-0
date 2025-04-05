@@ -21,7 +21,7 @@ def copy_files(source, destination):
             dest_file.write(content)
             dest_file.close()
 
-    def backup(source, destination):
+def backup(source, destination):
         """Creates a backup of the source directory in the destination."""
         source_exists = os.path.exists(source)
         if source_exists == False:
@@ -48,3 +48,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Simple backup script")
     parser.add_argument("--source", required=True, help="Source directory to backup")
     parser.add_argument("--destination", required=True, help="Destination directory to store the backup")
+    args = parser.parse_args()
+
+    backup(args.source, args.destination)
