@@ -35,4 +35,5 @@ def copy_files(source, destination):
         backup_name = "backup_" + str(count)
         backup_path = os.path.join(destination, backup_name)
         os.makedirs(backup_path)
+        
         print("Backup successful: " + backup_path)
