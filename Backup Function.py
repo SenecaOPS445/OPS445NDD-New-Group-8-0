@@ -35,5 +35,10 @@ def copy_files(source, destination):
         backup_name = "backup_" + str(count)
         backup_path = os.path.join(destination, backup_name)
         os.makedirs(backup_path)
-        
+
+        try:
+            copy_files(source, backup_path)
+        except:
+            print("Error occurred during file copy.")
+            return
         print("Backup successful: " + backup_path)
