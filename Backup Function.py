@@ -36,6 +36,11 @@ def backup(source, destination):
         backup_name = "backup_" + str(count)
         backup_path = os.path.join(destination, backup_name)
         os.makedirs(backup_path)
+        try:
+            os.makedirs(backup_path)
+        except PermissionError:
+            print("Error: You do not have permission to create the backup folder in the destination.")
+            return
 
         try:
             copy_files(source, backup_path)
