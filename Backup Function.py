@@ -22,6 +22,15 @@ def copy_files(source, destination):
 
     def backup(source, destination):
         """Creates a backup of the source directory in the destination."""
+        source_exists = os.path.exists(source)
+        if source_exists == False:
+            print("Error: Source directory '" + source + "' does not exist.")
+            return
+
+        destination_exists = os.path.exists(destination)
+        if destination_exists == False:
+            os.makedirs(destination)
+        
         count = len(os.listdir(destination)) + 1
         backup_name = "backup_" + str(count)
         backup_path = os.path.join(destination, backup_name)
