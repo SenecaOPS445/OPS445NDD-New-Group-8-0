@@ -30,8 +30,13 @@ def backup(source, destination):
 
         destination_exists = os.path.exists(destination)
         if destination_exists == False:
+            print("Warning: Destination directory '" + destination + "' does not exist and will be created.")
+        try:
             os.makedirs(destination)
-        
+        except PermissionError:
+            print("Error: You do not have permission to create the destination directory.")
+            return
+                    
         count = len(os.listdir(destination)) + 1
         backup_name = "backup_" + str(count)
         backup_path = os.path.join(destination, backup_name)
