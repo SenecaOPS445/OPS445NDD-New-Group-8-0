@@ -17,7 +17,7 @@ def copy_files(source, destination):
             content = src_file.read()
             src_file.close()
 
-            dest_file = open(destination_path, 'w')
+            dest_file = open(destination_path, 'wb')
             dest_file.write(content)
             dest_file.close()
 
