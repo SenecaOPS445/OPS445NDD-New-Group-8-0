@@ -30,3 +30,15 @@ def zip_folder(source_folder, output_zip):
                     file_path = os.path.join(root, file)  # Full path to the file
                     arcname = os.path.relpath(file_path, start=source_folder)  # This keeps folder structure inside zip
                     zipf.write(file_path, arcname)  # Add the file to the zip archive
+    try:
+        # Create the ZIP file
+        with zipfile.ZipFile(output_zip, 'w', zipfile.ZIP_DEFLATED) as zipf:
+            for root, dirs, files in os.walk(source_folder):
+                for file in files:
+                    file_path = os.path.join(root, file)  # full path to the file
+                    arcname = os.path.relpath(file_path, start=source_folder)  # keep folder structure
+                    zipf.write(file_path, arcname)
+        print("ZIP file created successfully:", output_zip)
+
+    except Exception as e:
+        print("Something went wrong while creating the ZIP:", e)
