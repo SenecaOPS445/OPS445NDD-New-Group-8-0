@@ -1,13 +1,6 @@
-import os
-import zipfile
-import argparse
-
 def find_zip_in_directory(directory):
-    pass
-
-def restore_zip(source, destination):
-    pass
-
-if __name__ == "__main__":
-    pass
-
+    """Searches for the first .zip file in a directory."""
+    for item in os.listdir(directory):
+        if item.endswith(".zip"):
+            return os.path.join(directory, item)
+    return None
