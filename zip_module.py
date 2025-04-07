@@ -23,3 +23,10 @@ def zip_folder(source_folder, output_zip):
     # Ensure .zip extension
     if not output_zip.endswith(".zip"):
         output_zip += ".zip"
+        with zipfile.ZipFile(output_zip, 'w', zipfile.ZIP_DEFLATED) as zipf:
+            # Go through every folder, subfolder, and file inside the source folder
+            for root, dirs, files in os.walk(source_folder):
+                for file in files:
+                    file_path = os.path.join(root, file)  # Full path to the file
+                    arcname = os.path.relpath(file_path, start=source_folder)  # This keeps folder structure inside zip
+                    zipf.write(file_path, arcname)  # Add the file to the zip archive
