@@ -5,33 +5,40 @@ from Backup_Function import backup
 from Restore_Function import restore_zip
 from zip_module import zip_folder
 
-def main():
-    if len(sys.argv) < 4:
-        print("how to Use:")
-        print("  python3 assignment2.py backup <sourcedirectory> <destinationdirectory>")
-        print("  python3 assignment2.py zip <sourcedirectory> <output zip path>")
-        print("  python3 assignment2.py restore <zipped file or folder> <destination>")
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Usage:")
+        print("  python3 assignment2.py backup <source> <destination>")
+        print("  python3 assignment2.py zip <source folder> <outputzip>")
+        print("  python3 assignment2.py restore <sourcezip or folder> <destination>")
         sys.exit(1)
 
+    entry = sys.argv[1]
 
-    operation = sys.argv[1]
-    source = sys.argv[2]
-    destination = sys.argv[3]
-
-
-    if operation == "backup":
+    if entry == "backup":
+        if len(sys.argv) != 4:
+            print("Usage: python3 assignment2.py backup <source> <destination>")
+            sys.exit(1)
+        source = sys.argv[2]
+        destination = sys.argv[3]
         backup(source, destination)
 
-    elif operation == "zip":
-        zip_folder(source, destination)
+    elif entry == "zip":
+        if len(sys.argv) != 4:
+            print("Usage: python3 assignment2.py zip <sourcefolder> <outputzip>")
+            sys.exit(1)
+        source_folder = sys.argv[2]
+        output_zip = sys.argv[3]
+        zip_folder(source_folder, output_zip)
 
-    elif operation == "restore":
+    elif entry == "restore":
+        if len(sys.argv) != 4:
+            print("Usage: python3 assignment2.py restore <sourcezip or folder> <destination>")
+            sys.exit(1)
+        source = sys.argv[2]
+        destination = sys.argv[3]
         restore_zip(source, destination)
-
     else:
-        print("Unknown command: " + command)
+        print("Unknown command: " + entry)
         print("Options avaliable: backup, zip, restore")
         sys.exit(1)
-
-if __name__ == "__main__":
-    main()
