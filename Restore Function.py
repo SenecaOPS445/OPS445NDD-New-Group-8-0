@@ -1,14 +1,7 @@
-if not os.path.exists(source):
-    print(f"[ERROR] Source path '{source}' does not exist.")
-    return
+if not os.path.exists(destination):
+    os.makedirs(destination)
 
-if zipfile.is_zipfile(source):
-    zip_path = source
-elif os.path.isdir(source):
-    zip_path = find_zip_in_directory(source)
-    if zip_path is None:
-        print("[ERROR] No zip file found in the directory.")
-        return
-else:
-    print("[ERROR] Source must be a .zip file or a directory containing one.")
-    return
+try:
+    with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+        zip_ref.extractall(destination)
+        print(f"[SUCCESS] Restored contents of '{zip_path}' to '{destination}'")
