@@ -65,11 +65,3 @@ def backup(source, destination):
         return
 
     print("Backup successful: " + backup_path)
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Simple backup script")
-    parser.add_argument("--source", required=True, help="Source directory to backup")
-    parser.add_argument("--destination", required=True, help="Destination directory to store the backup")
-    args = parser.parse_args()
-
-    backup(args.source, args.destination)
