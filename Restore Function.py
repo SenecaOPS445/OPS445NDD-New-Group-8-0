@@ -1,7 +1,5 @@
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Restore a zip file to a specified location.")
-    parser.add_argument("source", help="Path to the zip file or a directory containing a zip file")
-    parser.add_argument("destination", help="Destination folder to extract the zip contents")
-    args = parser.parse_args()
+def find_zip_in_directory(directory):
+    """Searches for the first .zip file in a directory."""
 
-    restore_zip(args.source, args.destination)
+def restore_zip(source, destination):
+    """Restores (unzips) a .zip file from the source to the destination."""
