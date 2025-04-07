@@ -1,6 +1,5 @@
-def find_zip_in_directory(directory):
-    """Searches for the first .zip file in a directory."""
-    for item in os.listdir(directory):
-        if item.endswith(".zip"):
-            return os.path.join(directory, item)
-    return None
+def restore_zip(source, destination):
+    """Restores (unzips) a .zip file from the source to the destination."""
+    if os.path.exists(source) == False:
+        print(f"[ERROR] Source path '{source}' does not exist.")
+        return
