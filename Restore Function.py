@@ -1,7 +1,6 @@
-if not os.path.exists(destination):
-    os.makedirs(destination)
-
-try:
-    with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-        zip_ref.extractall(destination)
-        print(f"[SUCCESS] Restored contents of '{zip_path}' to '{destination}'")
+if not os.path.exists(source):
+    ...
+elif os.path.isdir(source):
+    ...
+else:
+    print("[ERROR] Source must be a .zip file or a directory containing one.")
