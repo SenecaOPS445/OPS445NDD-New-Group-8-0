@@ -23,22 +23,21 @@ def zip_folder(source_folder, output_zip):
     # Ensure .zip extension
     if not output_zip.endswith(".zip"):
         output_zip += ".zip"
-        with zipfile.ZipFile(output_zip, 'w', zipfile.ZIP_DEFLATED) as zipf:
-            # Go through every folder, subfolder, and file inside the source folder
-            for root, dirs, files in os.walk(source_folder):
-                for file in files:
-                    file_path = os.path.join(root, file)  # Full path to the file
-                    arcname = os.path.relpath(file_path, start=source_folder)  # This keeps folder structure inside zip
-                    zipf.write(file_path, arcname)  # Add the file to the zip archive
-    try:
-        # Create the ZIP file
-        with zipfile.ZipFile(output_zip, 'w', zipfile.ZIP_DEFLATED) as zipf:
-            for root, dirs, files in os.walk(source_folder):
-                for file in files:
-                    file_path = os.path.join(root, file)  # full path to the file
-                    arcname = os.path.relpath(file_path, start=source_folder)  # keep folder structure
-                    zipf.write(file_path, arcname)
-        print("ZIP file created successfully:", output_zip)
 
-    except Exception as e:
-        print("Something went wrong while creating the ZIP:", e)
+    try:
+        with zipfile.ZipFile(output_zip, 'w', zipfile.ZIP_DEFLATED) as zipf:
+            for root, dirs, files in os.walk(source_folder):
+                for file in files:
+                    file_path = os.path.join(root, file)
+                    arcname = os.path.relpath(file_path, start=source_folder)
+                    try:
+                        zipf.write(file_path, arcname)
+                    except PermissionError:
+                        print(f"Error: Permission denied to read {file_path}.")
+                        sys.exit(1)
+                    except FileNotFoundError:
+                        print(f"Error: File not found: {file_path}.")
+                        sys.exit(1)
+                    except OSError as e:
+                        print(f"Error: OS error with {file_path}: {e}")
+                        sys.exit(1)
