@@ -41,3 +41,15 @@ def zip_folder(source_folder, output_zip):
                     except OSError as e:
                         print(f"Error: OS error with {file_path}: {e}")
                         sys.exit(1)
+
+        print(f"ZIP file created successfully: {output_zip}")
+
+    except PermissionError:
+        print(f"Error: Permission denied to write {output_zip}. Please check the output directory.")
+        sys.exit(1)
+    except zipfile.BadZipFile:
+        print("Error: Failed to create a valid ZIP file. Possibly corrupt data or unsupported file type.")
+        sys.exit(1)
+    except OSError as e:
+        print(f"Error: OS error while creating ZIP file: {e}")
+        sys.exit(1)
